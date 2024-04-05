@@ -13,7 +13,7 @@ export const VacationRules = () => {
   return (
     <div>
       <h2 className="text-xl font-bold">{t("vacation-rules")}</h2>
-      <ul className="flex flex-col gap-3">
+      <ul className="flex flex-col gap-2">
         {vacationRules.map((rule) => (
           <Alert className="flex gap-3 items-center">
             <div>

@@ -7,6 +7,12 @@
     "one-period-14-days": "One period must be of at least 14 days",
     "two-periods-5-days-at-least": "The other two periods must be of at least 5 days each",
     "cannot-start-two-days-prior-holidays": "The vacation period cannot start within two days prior to the holidays or weekly paid rests",
-    "must-return-to-work-one-day": "You must return to work for at least 1 day before starting your vacation for a new vacation period"
+    "must-return-to-work-one-day": "You must return to work for at least 1 day before starting your vacation for a new vacation period",
+    "vacation-periods": "Vacation Periods",
+    "start-date": "Start Date",
+    "end-date": "End Date",
+    "weekdays": "Week Days",
+    "weekend-holiday": "Weekend/Holidays",
+    "total-days": "Total days"
   }
 }

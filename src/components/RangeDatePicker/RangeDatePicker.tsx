@@ -1,18 +1,27 @@
-import * as React from "react";
 // import { addDays } from "date-fns";
 import { DateRange } from "react-day-picker";
-import { Button, Calendar, Popover } from "@components";
+import {
+  Button,
+  Calendar,
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@components";
 import { cn } from "@lib";
-import { CalendarIcon } from "@radix-ui/react-icons";
-import { PopoverTrigger, PopoverContent } from "@radix-ui/react-popover";
 import { format } from "date-fns";
-import { useState } from "react";
+import { Dispatch, SetStateAction } from "react";
+import { CalendarIcon } from "lucide-react";
 
+export interface RangeDatePickerProps
+  extends React.HTMLAttributes<HTMLDivElement> {
+  date: DateRange | undefined;
+  setDate: Dispatch<SetStateAction<DateRange | undefined>>;
+}
 export function RangeDatePicker({
   className,
-}: React.HTMLAttributes<HTMLDivElement>) {
-  const [date, setDate] = useState<DateRange | undefined>();
-
+  date,
+  setDate,
+}: RangeDatePickerProps) {
   return (
     <div className={cn("grid gap-2", className)}>
       <Popover>
@@ -40,7 +49,10 @@ export function RangeDatePicker({
             )}
           </Button>
         </PopoverTrigger>
-        <PopoverContent className="w-auto p-0" align="start">
+        <PopoverContent
+          className="w-auto p-0 bg-white z-50 shadow-md "
+          align="start"
+        >
           <Calendar
             initialFocus
             mode="range"

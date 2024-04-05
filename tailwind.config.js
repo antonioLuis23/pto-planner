@@ -17,9 +17,6 @@ export const theme = {
     },
   },
   extend: {
-    fontFamily: {
-      poppins: ["Poppins", "sans-serif"],
-    },
     colors: {
       border: "hsl(var(--border))",
       input: "hsl(var(--input))",
@@ -53,6 +50,19 @@ export const theme = {
       card: {
         DEFAULT: "hsl(var(--card))",
         foreground: "hsl(var(--card-foreground))",
+      },
+      orange: {
+        50: "#fffaec",
+        100: "#fff5d3",
+        200: "#ffe6a5",
+        300: "#ffd36d",
+        400: "#ffb432",
+        500: "#ff9b0a",
+        600: "#ff8300",
+        700: "#cc6002",
+        800: "#a14a0b",
+        900: "#823e0c",
+        950: "#461d04",
       },
     },
     borderRadius: {
