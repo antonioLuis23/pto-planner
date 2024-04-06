@@ -2,7 +2,7 @@ import { VacationRules, VacationPeriods, NavBar } from "@components";
 import { useState } from "react";
 // import { addDays } from "date-fns";
 import { DateRange } from "react-day-picker";
-import { calculateDays, feriadosNacionais } from "@lib";
+import { calculateDays } from "@lib";
 
 export interface VacationPeriodsType {
   dateRange: DateRange;
@@ -15,7 +15,6 @@ function App() {
     []
   );
   const [dateRange, setDateRange] = useState<DateRange | undefined>();
-  console.log("feriados nacionais:", feriadosNacionais(2024));
   const addPeriod = () => {
     if (dateRange) {
       const { weekdays, weekendHolidays, totalDays } = calculateDays(dateRange);
