@@ -13,6 +13,9 @@
     "end-date": "End Date",
     "weekdays": "Week Days",
     "weekend-holiday": "Weekend/Holidays",
-    "total-days": "Total days"
+    "total-days": "Total days",
+    "cancel": "Cancel",
+    "select-period": "Select a period",
+    "delete": "Delete"
   }
 }

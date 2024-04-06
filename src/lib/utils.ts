@@ -1,3 +1,4 @@
+import { VacationPeriodsType } from "App";
 import { type ClassValue, clsx } from "clsx";
 import { addDays, differenceInDays, isWeekend } from "date-fns";
 import { DateRange } from "react-day-picker";
@@ -27,4 +28,25 @@ export function calculateDays(dateRange: DateRange) {
     }
   }
   return { weekdays, weekendHolidays, totalDays };
+}
+
+export function sumDays(vacationPeriods: VacationPeriodsType[]) {
+  // Initialize the accumulator for each property
+  let totalWeekdays = 0;
+  let totalWeekendHolidays = 0;
+  let totalDays = 0;
+
+  // Loop through each vacation period
+  vacationPeriods.forEach((period) => {
+    totalWeekdays += period.weekdays;
+    totalWeekendHolidays += period.weekendHolidays;
+    totalDays += period.totalDays;
+  });
+
+  // Return the accumulated totals
+  return {
+    sumWeekdays: totalWeekdays,
+    sumWeekendHolidays: totalWeekendHolidays,
+    sumTotalDays: totalDays,
+  };
 }

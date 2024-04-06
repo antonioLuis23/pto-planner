@@ -14,7 +14,7 @@ export const LanguageDropdown = () => {
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <Button variant="outline" size="icon">
-          <Languages className="h-[1.2rem] w-[1.2rem]" />
+          <Languages className="h-[1rem] w-[1rem]" />
           <span className="sr-only">choose language</span>
         </Button>
       </DropdownMenuTrigger>

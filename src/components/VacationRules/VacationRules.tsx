@@ -1,6 +1,6 @@
 import { useTranslation } from "react-i18next";
 import { Alert, AlertDescription } from "../Alert/Alert";
-import { IoInformationCircleOutline } from "react-icons/io5";
+import { Info } from "lucide-react";
 export const VacationRules = () => {
   const { t } = useTranslation();
   const vacationRules = [
@@ -12,12 +12,12 @@ export const VacationRules = () => {
   ];
   return (
     <div>
-      <h2 className="text-xl font-bold">{t("vacation-rules")}</h2>
+      <h2 className="text-xl font-semibold mb-3">{t("vacation-rules")}</h2>
       <ul className="flex flex-col gap-2">
         {vacationRules.map((rule) => (
           <Alert className="flex gap-3 items-center">
             <div>
-              <IoInformationCircleOutline />
+              <Info className="w-[1rem] h-[1rem]" />
             </div>
             <AlertDescription className="flex items-center">
               {rule}
