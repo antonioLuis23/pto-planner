@@ -16,6 +16,8 @@
     "total-days": "Total days",
     "cancel": "Cancel",
     "select-period": "Select a period",
-    "delete": "Delete"
+    "delete": "Delete",
+    "selected": "Selected",
+    "holiday": "Holiday"
   }
 }

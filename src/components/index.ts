@@ -38,7 +38,7 @@ export {
   TableHead,
   TableHeader,
 } from "./Table/Table";
-export { NavBar } from "./NavBar/NavBar";
+export { NavBar } from "./Popover/NavBar";
 export { ToggleTheme } from "./ToggleTheme/ToggleTheme";
 export {
   AlertDialog,

@@ -16,24 +16,29 @@ import { Dispatch, SetStateAction } from "react";
 import { DateRange } from "react-day-picker";
 import { sumDays } from "@lib";
 import { Trash2 } from "lucide-react";
+
 interface VacationPeriodsProps {
   vacationPeriods: VacationPeriodsType[];
   date: DateRange | undefined;
   setDate: Dispatch<SetStateAction<DateRange | undefined>>;
   addPeriod: () => void;
+  deletePeriod: (id: string) => void;
 }
+
 export const VacationPeriods: React.FC<VacationPeriodsProps> = ({
   vacationPeriods,
   date,
   setDate,
   addPeriod,
+  deletePeriod,
 }) => {
   const { t } = useTranslation();
   const { sumWeekdays, sumWeekendHolidays, sumTotalDays } =
     sumDays(vacationPeriods);
-  const disabledDays = vacationPeriods.map((period) => {
+  const selectedDays = vacationPeriods.map((period) => {
     return { from: period.dateRange.from, to: period.dateRange.to };
   });
+
   return (
     <div>
       <Table>
@@ -58,7 +63,7 @@ export const VacationPeriods: React.FC<VacationPeriodsProps> = ({
               <TableCell>{period.weekendHolidays}</TableCell>
               <TableCell>{period.totalDays}</TableCell>
               <TableCell>
-                <Button variant="ghost">
+                <Button variant="ghost" onClick={() => deletePeriod(period.id)}>
                   <Trash2 className="w-[1.25rem] h-[1.25rem]" />
                   <span className="sr-only">t("delete")</span>
                 </Button>
@@ -71,7 +76,7 @@ export const VacationPeriods: React.FC<VacationPeriodsProps> = ({
                 <ModalDatePicker
                   maxSelection={30 - sumTotalDays}
                   date={date}
-                  disabledDays={disabledDays}
+                  selectedDays={selectedDays}
                   setDate={setDate}
                   vacationPeriods={vacationPeriods}
                   addPeriod={addPeriod}

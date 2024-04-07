@@ -9,6 +9,7 @@ import {
   AlertDialogAction,
   Calendar,
 } from "@components";
+import { getCurrentYear, nationalHolidays } from "@lib";
 import { VacationPeriodsType } from "App";
 import { CalendarPlus2 } from "lucide-react";
 import { Dispatch, SetStateAction } from "react";
@@ -19,7 +20,7 @@ export interface ModalDatePickerProps {
   setDate: Dispatch<SetStateAction<DateRange | undefined>>;
   addPeriod: () => void;
   maxSelection?: number;
-  disabledDays: Matcher[];
+  selectedDays: Matcher[];
   vacationPeriods: VacationPeriodsType[];
 }
 export const ModalDatePicker: React.FC<ModalDatePickerProps> = ({
@@ -27,10 +28,31 @@ export const ModalDatePicker: React.FC<ModalDatePickerProps> = ({
   setDate,
   addPeriod,
   maxSelection = 30,
-  disabledDays,
+  selectedDays,
 }) => {
   const { t } = useTranslation();
-
+  const selectedStyles = {
+    backgroundColor: "#65D79A",
+    color: "black",
+    opacity: 1,
+  };
+  const holidaysStyle = {
+    backgroundColor: "#623CEA",
+    opacity: 1,
+    color: "white",
+  };
+  const holidayThisYear = nationalHolidays(getCurrentYear());
+  const holidaysNextYear = nationalHolidays(getCurrentYear() + 1);
+  console.log(
+    "(Object.values(holidayThisYear):",
+    Object.values(holidayThisYear),
+  );
+  const holidays = [
+    ...Object.values(holidayThisYear),
+    ...Object.values(holidaysNextYear),
+  ];
+  const disabledDays = [...selectedDays, ...Object.values(holidayThisYear)];
+  console.log("disabledDays:", disabledDays);
   return (
     <AlertDialog>
       <AlertDialogTrigger className="flex gap-2 justify-center items-center w-full p-2">
@@ -48,12 +70,29 @@ export const ModalDatePicker: React.FC<ModalDatePickerProps> = ({
           initialFocus
           mode="range"
           disabled={disabledDays}
+          modifiers={{ picked: selectedDays, holidays }}
+          modifiersStyles={{
+            picked: selectedStyles,
+            holidays: holidaysStyle,
+          }}
           defaultMonth={date?.from}
           selected={date}
           onSelect={setDate}
           numberOfMonths={2}
+          fromYear={getCurrentYear()}
+          toYear={getCurrentYear() + 1}
         />
-        <AlertDialogFooter>
+        <div className="flex gap-4">
+          <div className="flex gap-1 justify-center items-center">
+            <div className="bg-[#65D79A] w-4 h-4 rounded-sm"></div>
+            <span>{t("selected")}</span>
+          </div>
+          <div className="flex gap-2 justify-center items-center">
+            <div className="bg-[#623CEA] w-4 h-4 rounded-sm"></div>
+            <span>{t("holiday")}</span>
+          </div>
+        </div>
+        <AlertDialogFooter className="px-4">
           <AlertDialogCancel>{t("cancel")}</AlertDialogCancel>
           <AlertDialogAction onClick={addPeriod}>{t("add")}</AlertDialogAction>
         </AlertDialogFooter>
