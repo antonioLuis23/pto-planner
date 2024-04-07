@@ -68,7 +68,7 @@ export const VacationPeriods: React.FC<VacationPeriodsProps> = ({
               </TableCell>
             </TableRow>
           ))}
-          {vacationPeriods.length < 3 && (
+          {vacationPeriods.length < 3 && sumTotalDays < 30 && (
             <TableRow>
               <TableCell colSpan={6} className="text-center cursor-pointer p-0">
                 <div className="flex gap-2 justify-center items-center">

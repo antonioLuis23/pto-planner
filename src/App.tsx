@@ -50,7 +50,7 @@ function App() {
     <div>
       <NavBar />
       <div className="max-w-screen-lg px-6 mx-auto mt-3">
-        <VacationRules />
+        <VacationRules vacationPeriods={vacationPeriods} />
         <div className="flex justify-between mt-5"></div>
         <VacationPeriods
           date={dateRange}
