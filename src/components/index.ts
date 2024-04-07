@@ -38,7 +38,7 @@ export {
   TableHead,
   TableHeader,
 } from "./Table/Table";
-export { NavBar } from "./Popover/NavBar";
+export { NavBar } from "./NavBar/NavBar";
 export { ToggleTheme } from "./ToggleTheme/ToggleTheme";
 export {
   AlertDialog,
@@ -54,4 +54,23 @@ export {
   AlertDialogCancel,
 } from "./AlertDialog/AlertDialog";
 
+export {
+  Dialog,
+  DialogPortal,
+  DialogOverlay,
+  DialogTrigger,
+  DialogClose,
+  DialogContent,
+  DialogHeader,
+  DialogFooter,
+  DialogTitle,
+  DialogDescription,
+} from "./Dialog/Dialog";
+
 export { ModalDatePicker } from "./ModalDatePicker/ModalDatePicker";
+export {
+  Collapsible,
+  CollapsibleTrigger,
+  CollapsibleContent,
+} from "./Collapsible/Collapsible";
+export { ErrorDialog } from "./ErrorDialog/ErrorDialog";

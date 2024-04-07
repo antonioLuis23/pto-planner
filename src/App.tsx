@@ -2,7 +2,8 @@ import { VacationRules, VacationPeriods, NavBar } from "@components";
 import { useState } from "react";
 // import { addDays } from "date-fns";
 import { DateRange } from "react-day-picker";
-import { calculateDays, nationalHolidays } from "@lib";
+import { calculateDays } from "@lib";
+import { add, sub } from "date-fns";
 
 export interface VacationPeriodsType {
   dateRange: DateRange;
@@ -10,20 +11,27 @@ export interface VacationPeriodsType {
   weekendHolidays: number;
   totalDays: number;
   id: string;
+  dayBefore: Date;
+  dayAfter: Date;
 }
 function App() {
   const [vacationPeriods, setVacationPeriods] = useState<VacationPeriodsType[]>(
-    [],
+    []
   );
   const [dateRange, setDateRange] = useState<DateRange | undefined>();
   const addPeriod = () => {
     if (dateRange) {
+      const dayBefore = sub(dateRange.from!, { days: 1 });
+      const dayAfter = add(dateRange.to!, { days: 1 });
+
       const { weekdays, weekendHolidays, totalDays } = calculateDays(dateRange);
       setVacationPeriods((oldVacationPeriods) => [
         ...oldVacationPeriods,
         {
           dateRange,
           weekdays,
+          dayBefore,
+          dayAfter,
           weekendHolidays,
           totalDays,
           id: crypto.randomUUID(),
@@ -37,8 +45,7 @@ function App() {
       ...oldVacationPeriods.filter((period) => period.id !== id),
     ]);
   };
-  console.log("national holidays 2025", nationalHolidays(2025));
-  console.log("national holidays 2026", nationalHolidays(2026));
+
   return (
     <div>
       <NavBar />

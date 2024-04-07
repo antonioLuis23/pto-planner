@@ -1,11 +1,58 @@
 import { VacationPeriodsType } from "App";
 import { type ClassValue, clsx } from "clsx";
-import { add, addDays, differenceInDays, isWeekend, sub } from "date-fns";
+import { addDays, differenceInDays, isWeekend, subDays } from "date-fns";
 import { DateRange } from "react-day-picker";
 import { twMerge } from "tailwind-merge";
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
+}
+
+export function calculateTwoDaysPriorHoliday() {
+  const holidays = twoYearHolidayAsArray();
+  const twoDaysPriorHoliday: Date[] = [];
+  holidays.forEach((holiday) => {
+    twoDaysPriorHoliday.push(subDays(holiday, 1));
+    twoDaysPriorHoliday.push(subDays(holiday, 2));
+  });
+  return twoDaysPriorHoliday;
+}
+
+export function isOutsideTwoDaysPrioHoliday(startDate: Date) {
+  const twoDaysPriorHoliday = calculateTwoDaysPriorHoliday();
+  return !twoDaysPriorHoliday.some((priorHoliday) => {
+    return (
+      startDate.getFullYear() === priorHoliday.getFullYear() &&
+      startDate.getMonth() === priorHoliday.getMonth() &&
+      startDate.getDate() === priorHoliday.getDate()
+    );
+  });
+}
+
+export function isPeriodValid(dateRange: DateRange | undefined) {
+  if (dateRange && dateRange.from && dateRange.to) {
+    if (!isOutsideTwoDaysPrioHoliday(dateRange.from)) {
+      return "cant-select-two-days-prior";
+    }
+    const totalDays = differenceInDays(dateRange.to, dateRange.from) + 1;
+    if (totalDays < 5) {
+      return "vacation-period-5-days";
+    }
+    return null;
+  }
+  return "select-start-end-date";
+}
+
+export function isHoliday(date: Date) {
+  const holidays = twoYearHolidayAsArray();
+  return holidays.some((holiday) => {
+    // Compare only year, month, and day for accurate matching
+    return (
+      date.getFullYear() === holiday.getFullYear() &&
+      date.getMonth() === holiday.getMonth() &&
+      date.getDate() === holiday.getDate()
+    );
+  });
 }
 
 export function calculateDays(dateRange: DateRange) {
@@ -18,7 +65,7 @@ export function calculateDays(dateRange: DateRange) {
 
     let currentDate = dateRange.from;
     while (count < totalDays) {
-      if (isWeekend(currentDate)) {
+      if (isWeekend(currentDate) || isHoliday(currentDate)) {
         weekendHolidays++;
       } else {
         weekdays++;
@@ -85,10 +132,10 @@ export function nationalHolidays(year: number) {
   };
 
   const easter = calculateEaster(year);
-  const goodFriday = sub(easter, { days: 2 });
-  const carnivalDay1 = sub(easter, { days: 47 });
-  const carnivalDay2 = sub(easter, { days: 48 });
-  const corpusChristi = add(easter, { days: 60 });
+  const goodFriday = subDays(easter, 2);
+  const carnivalDay1 = subDays(easter, 47);
+  const carnivalDay2 = subDays(easter, 48);
+  const corpusChristi = addDays(easter, 60);
   const variableHolidays = {
     "Sexta-feira Santa": goodFriday,
     "Carnaval dia 1": carnivalDay1,
@@ -103,4 +150,23 @@ export function nationalHolidays(year: number) {
 
 export function getCurrentYear() {
   return new Date().getFullYear();
+}
+
+export function extractDayBuffers(periods: VacationPeriodsType[]) {
+  const dayBuffers = [];
+  for (const period of periods) {
+    dayBuffers.push(period.dayBefore);
+    dayBuffers.push(period.dayAfter);
+  }
+  return dayBuffers;
+}
+
+export function twoYearHolidayAsArray() {
+  const holidayThisYear = nationalHolidays(getCurrentYear());
+  const holidaysNextYear = nationalHolidays(getCurrentYear() + 1);
+
+  return [
+    ...Object.values(holidayThisYear),
+    ...Object.values(holidaysNextYear),
+  ];
 }

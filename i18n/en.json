@@ -3,6 +3,7 @@
     "add": "Add",
     "pto-planner": "PTO Planner",
     "vacation-rules": "Vacation Rules",
+    "30-days-vacation": "You are entitled to 30 days of vacation",
     "divided-three-period": "Vacation can be divided into up to three periods",
     "one-period-14-days": "One period must be of at least 14 days",
     "two-periods-5-days-at-least": "The other two periods must be of at least 5 days each",
@@ -18,6 +19,12 @@
     "select-period": "Select a period",
     "delete": "Delete",
     "selected": "Selected",
-    "holiday": "Holiday"
+    "holiday": "Holiday",
+    "blocked-rule-6": "Blocked by rule 6",
+    "blocked": "Blocked",
+    "vacation-period-5-days": "Vacation period needs to have at least 5 days.",
+    "select-start-end-date": "You need to select a start and end date",
+    "error": "Error",
+    "cant-select-two-days-prior": "A vacation period can not start within two days prior a holiday"
   }
 }
