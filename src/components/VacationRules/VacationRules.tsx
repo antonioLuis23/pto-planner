@@ -1,6 +1,6 @@
 import { useTranslation } from "react-i18next";
 import { Alert, AlertDescription } from "../Alert/Alert";
-import { ChevronsUpDown, CircleCheck, CircleX, Info } from "lucide-react";
+import { CircleCheck, CircleX, Info, Minus, Plus } from "lucide-react";
 import {
   Button,
   Collapsible,
@@ -30,11 +30,15 @@ export const VacationRules: React.FC<VacationRulesProps> = ({
   return (
     <div className="rounded-sm border bg-background p-3">
       <Collapsible open={isOpen} onOpenChange={setIsOpen}>
-        <div className="flex  gap-1">
+        <div className="flex justify-between ">
           <h2 className="text-lg font-semibold mb-3">{t("vacation-rules")}</h2>
           <CollapsibleTrigger asChild>
-            <Button variant="ghost" size="sm" className="w-9 p-0">
-              <ChevronsUpDown className="h-4 w-4" />
+            <Button variant="ghost" size="sm" className="w-8 p-0">
+              {!isOpen ? (
+                <Plus className="h-5 w-5" strokeWidth={3} />
+              ) : (
+                <Minus className="h-5 w-5" strokeWidth={3} />
+              )}
               <span className="sr-only">Toggle</span>
             </Button>
           </CollapsibleTrigger>
