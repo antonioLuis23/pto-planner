@@ -40,35 +40,53 @@ export const VacationPeriods: React.FC<VacationPeriodsProps> = ({
   const dayBuffers = extractDayBuffers(vacationPeriods);
 
   return (
-    <div>
-      <Table>
-        <TableHeader>
-          <TableRow>
-            <TableHead>{t("start-date")}</TableHead>
-            <TableHead>{t("end-date")}</TableHead>
-            <TableHead>{t("weekend-holiday")}</TableHead>
-            <TableHead>{t("total-days")}</TableHead>
-            <TableHead>{t("delete")}</TableHead>
-          </TableRow>
-        </TableHeader>
-        <TableBody>
-          {vacationPeriods.map((period, index) => (
-            <TableRow key={index}>
-              <TableCell>
-                {format(period.dateRange.from!, "LLL dd, y")}
-              </TableCell>
-              <TableCell>{format(period.dateRange.to!, "LLL dd, y")}</TableCell>
-              <TableCell>{period.weekendHolidays}</TableCell>
-              <TableCell>{period.totalDays}</TableCell>
-              <TableCell>
-                <Button variant="ghost" onClick={() => deletePeriod(period.id)}>
-                  <Trash2 className="w-[1.25rem] h-[1.25rem]" />
-                  <span className="sr-only">t("delete")</span>
-                </Button>
-              </TableCell>
+    <div className="rounded-sm border p-3">
+      <div className="flex justify-between items-center">
+        <h2 className="font-semibold text-lg">{t("vacation-periods")}</h2>
+        <ModalDatePicker
+          maxSelection={30 - sumTotalDays}
+          date={date}
+          selectedDays={selectedDays}
+          setDate={setDate}
+          vacationPeriods={vacationPeriods}
+          addPeriod={addPeriod}
+          dayBuffers={dayBuffers}
+        />
+      </div>
+      {vacationPeriods.length > 0 && (
+        <Table>
+          <TableHeader>
+            <TableRow>
+              <TableHead>{t("start-date")}</TableHead>
+              <TableHead>{t("end-date")}</TableHead>
+              <TableHead>{t("weekend-holiday")}</TableHead>
+              <TableHead>{t("total-days")}</TableHead>
+              <TableHead>{t("delete")}</TableHead>
             </TableRow>
-          ))}
-          {vacationPeriods.length < 3 && sumTotalDays < 30 && (
+          </TableHeader>
+          <TableBody>
+            {vacationPeriods.map((period, index) => (
+              <TableRow key={index}>
+                <TableCell>
+                  {format(period.dateRange.from!, "LLL dd, y")}
+                </TableCell>
+                <TableCell>
+                  {format(period.dateRange.to!, "LLL dd, y")}
+                </TableCell>
+                <TableCell>{period.weekendHolidays}</TableCell>
+                <TableCell>{period.totalDays}</TableCell>
+                <TableCell>
+                  <Button
+                    variant="ghost"
+                    onClick={() => deletePeriod(period.id)}
+                  >
+                    <Trash2 className="w-[1.25rem] h-[1.25rem]" />
+                    <span className="sr-only">t("delete")</span>
+                  </Button>
+                </TableCell>
+              </TableRow>
+            ))}
+            {/* {vacationPeriods.length < 3 && sumTotalDays < 30 && (
             <TableRow>
               <TableCell colSpan={6} className="text-center cursor-pointer p-0">
                 <div className="flex gap-2 justify-center items-center">
@@ -84,19 +102,20 @@ export const VacationPeriods: React.FC<VacationPeriodsProps> = ({
                 </div>
               </TableCell>
             </TableRow>
+          )} */}
+          </TableBody>
+          {vacationPeriods.length > 0 && (
+            <TableFooter>
+              <TableRow>
+                <TableCell colSpan={2}>Total</TableCell>
+                <TableCell>{sumWeekendHolidays}</TableCell>
+                <TableCell>{sumTotalDays}</TableCell>
+                <TableCell></TableCell>
+              </TableRow>
+            </TableFooter>
           )}
-        </TableBody>
-        {vacationPeriods.length > 0 && (
-          <TableFooter>
-            <TableRow>
-              <TableCell colSpan={2}>Total</TableCell>
-              <TableCell>{sumWeekendHolidays}</TableCell>
-              <TableCell>{sumTotalDays}</TableCell>
-              <TableCell></TableCell>
-            </TableRow>
-          </TableFooter>
-        )}
-      </Table>
+        </Table>
+      )}
     </div>
   );
 };

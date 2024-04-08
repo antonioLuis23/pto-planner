@@ -25,6 +25,12 @@
     "vacation-period-5-days": "Vacation period needs to have at least 5 days.",
     "select-start-end-date": "You need to select a start and end date",
     "error": "Error",
-    "cant-select-two-days-prior": "A vacation period can not start within two days prior a holiday"
+    "cant-select-two-days-prior": "A vacation period can not start within two days prior a holiday",
+    "add-period": "Add period",
+    "english": "English",
+    "portuguese": "Portuguese",
+    "light": "Light",
+    "dark": "Dark",
+    "system": "System"
   }
 }

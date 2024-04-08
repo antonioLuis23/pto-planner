@@ -1,11 +1,36 @@
 {
   "translation": {
+    "add": "Adicionar",
     "pto-planner": "Planejador de férias",
     "vacation-rules": "Regras para férias",
-    "divided-three-period": "As férias pode ser dividida em até três períodos.",
+    "30-days-vacation": "Você pode tirar 30 dias de férias.",
+    "divided-three-period": "As férias podem ser dividida em até três períodos.",
     "one-period-14-days": "Um período deve ter pelo menos 14 dias.",
     "two-periods-5-days-at-least": "Os outros dois períodos deve ter pelo menos 5 dias cada.",
     "cannot-start-two-days-prior-holidays": "O período de férias não pode começar dois dias antes feriados ou descansos pagos semanais.",
-    "must-return-to-work-one-day": "Você deve retornar ao trabalho por pelo menos 1 dia antes de começar um novo período de férias."
+    "must-return-to-work-one-day": "Você deve retornar ao trabalho por pelo menos 1 dia antes de começar um novo período de férias.",
+    "vacation-periods": "Períodos de férias",
+    "start-date": "Data de início",
+    "end-date": "Data de término",
+    "weekdays": "Dias da semana",
+    "weekend-holiday": "Finais de semana/Feriado",
+    "total-days": "Dias totais",
+    "cancel": "Cancelar",
+    "select-period": "Selecionar um período",
+    "delete": "Apagar",
+    "selected": "Selecionado",
+    "holiday": "Feriado",
+    "blocked-rule-6": "Bloqueado pela regra 6",
+    "blocked": "Bloqueado",
+    "vacation-period-5-days": "O período de férias deve ter no mínimo 5 dias.",
+    "select-start-end-date": "Você deve selecionar uma data de início e uma data de término.",
+    "error": "Erro",
+    "cant-select-two-days-prior": "O período de férias não pode começar dentro de dois dias de um feriado.",
+    "add-period": "Adicionar período",
+    "english": "Inglês",
+    "portuguese": "Português",
+    "light": "Claro",
+    "dark": "Escuro",
+    "system": "Sistema"
   }
 }

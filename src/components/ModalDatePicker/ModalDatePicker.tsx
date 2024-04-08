@@ -9,8 +9,10 @@ import {
   DialogTrigger,
   ErrorDialog,
 } from "@components";
+import { useWindowDimensions } from "@hooks";
 import { getCurrentYear, isPeriodValid, twoYearHolidayAsArray } from "@lib";
 import { VacationPeriodsType } from "App";
+import { pt } from "date-fns/locale";
 import { CalendarPlus2 } from "lucide-react";
 import { Dispatch, SetStateAction, useState } from "react";
 import { DateRange, Matcher } from "react-day-picker";
@@ -35,7 +37,9 @@ export const ModalDatePicker: React.FC<ModalDatePickerProps> = ({
   const [open, setOpen] = useState(false);
   const [isErrorOpen, setIsErrorOpen] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
+  const { width } = useWindowDimensions();
+  console.log("language:", i18n.language);
   const selectedStyle = {
     backgroundColor: "#65D79A",
     color: "black",
@@ -48,9 +52,10 @@ export const ModalDatePicker: React.FC<ModalDatePickerProps> = ({
     backgroundColor: "#623CEA",
     color: "white",
   };
+
   const holidays = twoYearHolidayAsArray();
   const disabledDays = [...selectedDays, ...holidays, ...dayBuffers];
-  console.log("date:", date);
+
   const addHandler = () => {
     const errorMessageKey = isPeriodValid(date);
     if (errorMessageKey === null) {
@@ -62,6 +67,7 @@ export const ModalDatePicker: React.FC<ModalDatePickerProps> = ({
       setIsErrorOpen(true);
     }
   };
+
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <ErrorDialog
@@ -69,17 +75,18 @@ export const ModalDatePicker: React.FC<ModalDatePickerProps> = ({
         setOpen={setIsErrorOpen}
         message={errorMessage}
       />
-      <DialogTrigger className="flex gap-2 justify-center items-center w-full p-2">
-        <div>
+      <DialogTrigger>
+        <Button className="flex gap-2">
           <CalendarPlus2 className="w-[1.2rem] h-[1.2rem]]" />
-        </div>
-        Add period
+          <span>{t("add-period")}</span>
+        </Button>
       </DialogTrigger>
-      <DialogContent>
+      <DialogContent className="w-fit">
         <DialogHeader>
           <DialogTitle>{t("select-period")}</DialogTitle>
         </DialogHeader>
         <Calendar
+          locale={i18n.language === "pt" ? pt : undefined}
           max={maxSelection}
           initialFocus
           mode="range"
@@ -93,23 +100,28 @@ export const ModalDatePicker: React.FC<ModalDatePickerProps> = ({
           defaultMonth={date?.from}
           selected={date}
           onSelect={setDate}
-          numberOfMonths={2}
+          numberOfMonths={width > 650 ? 2 : 1}
           fromYear={getCurrentYear()}
           toYear={getCurrentYear() + 1}
         />
         <div className="flex gap-4">
-          <div className="flex gap-1 justify-center items-center">
-            <div className="bg-[#65D79A] w-4 h-4 rounded-sm"></div>
-            <span>{t("selected")}</span>
-          </div>
           <div className="flex gap-2 justify-center items-center">
-            <div className="bg-[#623CEA] w-4 h-4 rounded-sm"></div>
+            <div className="bg-[#623CEA] opacity-50 w-4 h-4 rounded-sm"></div>
             <span>{t("holiday")}</span>
           </div>
-          <div className="flex gap-2 justify-center items-center">
-            <div className="bg-[#D64045] w-4 h-4 rounded-sm"></div>
-            <span>{t("blocked")}</span>
-          </div>
+          {selectedDays.length > 0 && (
+            <>
+              {" "}
+              <div className="flex gap-1 justify-center items-center">
+                <div className="bg-[#65D79A] opacity-50 w-4 h-4 rounded-sm"></div>
+                <span>{t("selected")}</span>
+              </div>
+              <div className="flex gap-2 justify-center items-center">
+                <div className="bg-[#D64045] opacity-50 w-4 h-4 rounded-sm"></div>
+                <span>{t("blocked")}</span>
+              </div>
+            </>
+          )}
         </div>
         <DialogFooter className="px-4">
           <Button onClick={addHandler}>{t("add")}</Button>

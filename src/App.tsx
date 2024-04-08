@@ -49,7 +49,7 @@ function App() {
   return (
     <div>
       <NavBar />
-      <div className="max-w-screen-lg px-6 mx-auto mt-3">
+      <div className="max-w-screen-lg px-5 sm:px-9 mx-auto mt-3">
         <VacationRules vacationPeriods={vacationPeriods} />
         <div className="flex justify-between mt-5"></div>
         <VacationPeriods

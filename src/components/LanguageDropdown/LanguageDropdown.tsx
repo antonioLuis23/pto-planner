@@ -9,7 +9,7 @@ import {
 } from "@components";
 
 export const LanguageDropdown = () => {
-  const { i18n } = useTranslation();
+  const { i18n, t } = useTranslation();
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
@@ -20,10 +20,10 @@ export const LanguageDropdown = () => {
       </DropdownMenuTrigger>
       <DropdownMenuContent className="z-50 rounded-md shadow-md" align="end">
         <DropdownMenuItem onClick={() => i18n.changeLanguage("en")}>
-          English
+          {t("english")}
         </DropdownMenuItem>
         <DropdownMenuItem onClick={() => i18n.changeLanguage("pt")}>
-          Português
+          {t("portuguese")}
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
