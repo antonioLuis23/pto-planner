@@ -4,7 +4,7 @@ import { useTranslation } from "react-i18next";
 export const NavBar = () => {
   const { t } = useTranslation();
   return (
-    <nav className="flex justify-between py-3 px-5 sm:px-9 border-b border-gray">
+    <nav className="flex justify-between py-3 px-5 bg-background sm:px-9 border-b border-gray">
       <div className="flex items-center ">
         <div className="mr-2">
           <CalendarHeart className="w-[1.5rem] h-[1.5rem]" />

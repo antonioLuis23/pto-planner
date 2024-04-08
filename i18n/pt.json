@@ -1,7 +1,7 @@
 {
   "translation": {
     "add": "Adicionar",
-    "pto-planner": "Planejador de férias",
+    "pto-planner": "PTO Planner",
     "vacation-rules": "Regras para férias",
     "30-days-vacation": "Você pode tirar 30 dias de férias.",
     "divided-three-period": "As férias podem ser dividida em até três períodos.",
@@ -31,6 +31,7 @@
     "portuguese": "Português",
     "light": "Claro",
     "dark": "Escuro",
-    "system": "Sistema"
+    "system": "Sistema",
+    "close": "Fechar"
   }
 }

@@ -28,7 +28,7 @@ export const VacationRules: React.FC<VacationRulesProps> = ({
   }, [vacationPeriods]);
   const vacationRules = useDefineVacationRules(vacationPeriods);
   return (
-    <div className="rounded-sm border p-3">
+    <div className="rounded-sm border bg-background p-3">
       <Collapsible open={isOpen} onOpenChange={setIsOpen}>
         <div className="flex  gap-1">
           <h2 className="text-lg font-semibold mb-3">{t("vacation-rules")}</h2>

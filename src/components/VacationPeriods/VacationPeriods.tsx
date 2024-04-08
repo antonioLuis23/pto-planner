@@ -40,8 +40,12 @@ export const VacationPeriods: React.FC<VacationPeriodsProps> = ({
   const dayBuffers = extractDayBuffers(vacationPeriods);
 
   return (
-    <div className="rounded-sm border p-3">
-      <div className="flex justify-between items-center">
+    <div className="rounded-sm border bg-background p-3">
+      <div
+        className={`flex justify-between items-center ${
+          vacationPeriods.length > 0 && "mb-2"
+        }`}
+      >
         <h2 className="font-semibold text-lg">{t("vacation-periods")}</h2>
         <ModalDatePicker
           maxSelection={30 - sumTotalDays}

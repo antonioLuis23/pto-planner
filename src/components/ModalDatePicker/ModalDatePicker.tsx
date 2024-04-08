@@ -39,7 +39,6 @@ export const ModalDatePicker: React.FC<ModalDatePickerProps> = ({
   const [errorMessage, setErrorMessage] = useState("");
   const { t, i18n } = useTranslation();
   const { width } = useWindowDimensions();
-  console.log("language:", i18n.language);
   const selectedStyle = {
     backgroundColor: "#65D79A",
     color: "black",
@@ -78,7 +77,7 @@ export const ModalDatePicker: React.FC<ModalDatePickerProps> = ({
       <DialogTrigger>
         <Button className="flex gap-2">
           <CalendarPlus2 className="w-[1.2rem] h-[1.2rem]]" />
-          <span>{t("add-period")}</span>
+          <span>{t("add")}</span>
         </Button>
       </DialogTrigger>
       <DialogContent className="w-fit">
