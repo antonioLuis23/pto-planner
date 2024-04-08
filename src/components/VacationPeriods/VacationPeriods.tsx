@@ -81,7 +81,7 @@ export const VacationPeriods: React.FC<VacationPeriodsProps> = ({
                     onClick={() => deletePeriod(period.id)}
                   >
                     <Trash2 className="w-[1.25rem] h-[1.25rem]" />
-                    <span className="sr-only">t("delete")</span>
+                    <span className="sr-only">{t("delete")}</span>
                   </Button>
                 </TableCell>
               </TableRow>

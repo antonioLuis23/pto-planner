@@ -10,6 +10,11 @@ import {
 
 export const LanguageDropdown = () => {
   const { i18n, t } = useTranslation();
+  const changeLanguageHandler = (language: "en" | "pt") => {
+    void i18n.changeLanguage(language, (err) => {
+      if (err) return console.log("something went wrong");
+    });
+  };
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
@@ -19,10 +24,10 @@ export const LanguageDropdown = () => {
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent className="z-50 rounded-md shadow-md" align="end">
-        <DropdownMenuItem onClick={() => i18n.changeLanguage("en")}>
+        <DropdownMenuItem onClick={() => changeLanguageHandler("en")}>
           {t("english")}
         </DropdownMenuItem>
-        <DropdownMenuItem onClick={() => i18n.changeLanguage("pt")}>
+        <DropdownMenuItem onClick={() => changeLanguageHandler("pt")}>
           {t("portuguese")}
         </DropdownMenuItem>
       </DropdownMenuContent>
