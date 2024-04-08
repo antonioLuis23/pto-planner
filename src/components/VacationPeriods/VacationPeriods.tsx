@@ -16,7 +16,7 @@ import { Dispatch, SetStateAction } from "react";
 import { DateRange } from "react-day-picker";
 import { extractDayBuffers, sumDays } from "@lib";
 import { Trash2 } from "lucide-react";
-
+import { pt } from "date-fns/locale";
 interface VacationPeriodsProps {
   vacationPeriods: VacationPeriodsType[];
   date: DateRange | undefined;
@@ -32,7 +32,7 @@ export const VacationPeriods: React.FC<VacationPeriodsProps> = ({
   addPeriod,
   deletePeriod,
 }) => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const { sumWeekendHolidays, sumTotalDays } = sumDays(vacationPeriods);
   const selectedDays = vacationPeriods.map((period) => {
     return { from: period.dateRange.from, to: period.dateRange.to };
@@ -68,10 +68,14 @@ export const VacationPeriods: React.FC<VacationPeriodsProps> = ({
             {vacationPeriods.map((period, index) => (
               <TableRow key={index}>
                 <TableCell>
-                  {format(period.dateRange.from!, "LLL dd, y")}
+                  {format(period.dateRange.from!, "LLL dd, y", {
+                    locale: i18n.language === "pt" ? pt : undefined,
+                  })}
                 </TableCell>
                 <TableCell>
-                  {format(period.dateRange.to!, "LLL dd, y")}
+                  {format(period.dateRange.to!, "LLL dd, y", {
+                    locale: i18n.language === "pt" ? pt : undefined,
+                  })}
                 </TableCell>
                 <TableCell>{period.weekendHolidays}</TableCell>
                 <TableCell>{period.totalDays}</TableCell>
@@ -86,23 +90,6 @@ export const VacationPeriods: React.FC<VacationPeriodsProps> = ({
                 </TableCell>
               </TableRow>
             ))}
-            {/* {vacationPeriods.length < 3 && sumTotalDays < 30 && (
-            <TableRow>
-              <TableCell colSpan={6} className="text-center cursor-pointer p-0">
-                <div className="flex gap-2 justify-center items-center">
-                  <ModalDatePicker
-                    maxSelection={30 - sumTotalDays}
-                    date={date}
-                    selectedDays={selectedDays}
-                    setDate={setDate}
-                    vacationPeriods={vacationPeriods}
-                    addPeriod={addPeriod}
-                    dayBuffers={dayBuffers}
-                  />
-                </div>
-              </TableCell>
-            </TableRow>
-          )} */}
           </TableBody>
           {vacationPeriods.length > 0 && (
             <TableFooter>
