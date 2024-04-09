@@ -6,7 +6,7 @@ import "../i18n/i18n";
 import { ThemeProvider } from "@lib";
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
-    <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
+    <ThemeProvider defaultTheme="light" storageKey="vite-ui-theme">
       <App />
     </ThemeProvider>
   </React.StrictMode>
