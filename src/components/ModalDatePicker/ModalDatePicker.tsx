@@ -122,7 +122,7 @@ export const ModalDatePicker: React.FC<ModalDatePickerProps> = ({
             </>
           )}
         </div>
-        <DialogFooter className="px-4">
+        <DialogFooter>
           <Button onClick={addHandler}>{t("add")}</Button>
         </DialogFooter>
       </DialogContent>
