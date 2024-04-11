@@ -15,8 +15,8 @@ i18n
   .init({
     compatibilityJSON: "v3",
     resources,
-    lng: "auto",
-    fallbackLng: "en",
+    lng: "pt",
+    fallbackLng: "pt",
     interpolation: {
       escapeValue: false, // react already safes from xss
     },
